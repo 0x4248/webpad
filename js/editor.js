@@ -38,6 +38,7 @@ function share_text() {
 	window.location.href = new_url;
 	navigator.clipboard.writeText(new_url);
 }
+
 var dropdown = document.querySelector("select");
 dropdown.addEventListener("change", function() {
 	var editorType = dropdown.value;
