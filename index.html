@@ -7,7 +7,6 @@
 	<div style="display: flex; justify-content: space-between;">
 		<h1>WebPad <span style="font-size: 15px;">A simple code editor</span></h1>
 		<button onclick="share_text()">Copy Link to code</button>
-		<!-- dropdown menu of languages -->
 		<select>
 			<option value="" disabled selected>Select code style</option>
 			<option value="text">Plain Text</option>
@@ -33,6 +32,7 @@
 	<div id="editor"></div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js" type="text/javascript" charset="utf-8"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js" type="text/javascript" charset="utf-8"></script>
 	<script>
 		var urlParams = new URLSearchParams(window.location.search);
 		var editorType = urlParams.get('editor');
@@ -40,6 +40,8 @@
 			editorType = "text";
 		}
 		var text = urlParams.get('text');
+		text = LZString.decompressFromEncodedURIComponent(text);
+		text = text.replace(/%0A/g, "\n");
 		var editor = ace.edit("editor");
 		if (text != null) {
 			editor.setValue(text);
@@ -66,6 +68,7 @@
 		function share_text() {
 			var text = editor.getValue();
 			text = text.replace(/\n/g, "%0A");
+			text = LZString.compressToEncodedURIComponent(text);
 			var url = window.location.href;
 			var new_url = url.split('?')[0] + "?editor=" + editorType + "&text=" + text;
 			window.location.href = new_url;
@@ -78,6 +81,7 @@
 			var url = window.location.href;
 			var text = editor.getValue();
 			text = text.replace(/\n/g, "%0A");
+			text = LZString.compressToEncodedURIComponent(text);
 			var new_url = url.split('?')[0] + "?editor=" + editorType + "&text=" + text;
 			window.location.href = new_url;
 		});
