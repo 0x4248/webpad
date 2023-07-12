@@ -4,7 +4,31 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-	<h1>WebPad <span style="font-size: 15px;">A simple code editor</span></h1>
+	<div style="display: flex; justify-content: space-between;">
+		<h1>WebPad <span style="font-size: 15px;">A simple code editor</span></h1>
+		<button onclick="share_text()">Copy Link to code</button>
+		<!-- dropdown menu of languages -->
+		<select>
+			<option value="" disabled selected>Select code style</option>
+			<option value="text">Plain Text</option>
+			<option value="c_cpp">C/C++</option>
+			<option value="csharp">C#</option>
+			<option value="css">CSS</option>
+			<option value="html">HTML</option>
+			<option value="java">Java</option>
+			<option value="javascript">JavaScript</option>
+			<option value="json">JSON</option>
+			<option value="lua">Lua</option>
+			<option value="markdown">Markdown</option>
+			<option value="php">PHP</option>
+			<option value="python">Python</option>
+			<option value="ruby">Ruby</option>
+			<option value="rust">Rust</option>
+			<option value="sql">SQL</option>
+			<option value="typescript">TypeScript</option>
+			<option value="xml">XML</option>
+		</select>
+	</div>
 	<hr>
 	<div id="editor"></div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js" type="text/javascript" charset="utf-8"></script>
@@ -19,6 +43,8 @@
 		var editor = ace.edit("editor");
 		if (text != null) {
 			editor.setValue(text);
+			var dropdown = document.querySelector("select");
+			dropdown.value = editorType;
 		}
 		ace.config.setModuleUrl(
 			"ace/theme/github_dark",
@@ -37,6 +63,24 @@
 			enableSnippets: true,
 		});
 		
+		function share_text() {
+			var text = editor.getValue();
+			text = text.replace(/\n/g, "%0A");
+			var url = window.location.href;
+			var new_url = url.split('?')[0] + "?editor=" + editorType + "&text=" + text;
+			window.location.href = new_url;
+			navigator.clipboard.writeText(new_url);
+		}
+
+		var dropdown = document.querySelector("select");
+		dropdown.addEventListener("change", function() {
+			var editorType = dropdown.value;
+			var url = window.location.href;
+			var text = editor.getValue();
+			text = text.replace(/\n/g, "%0A");
+			var new_url = url.split('?')[0] + "?editor=" + editorType + "&text=" + text;
+			window.location.href = new_url;
+		});
 	</script>
 </body>
 </html>

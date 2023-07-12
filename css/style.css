@@ -7,6 +7,34 @@ h1{
     margin-bottom: 2px;
 }
 
+button {
+    background-color: #373f46;
+    border: none;
+    color: white;
+    padding: 2px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 0px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+select {
+    background-color: #373f46;
+    border: none;
+    color: white;
+    padding: 0px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 0px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
 hr {
     border: 0;
     height: 0;
