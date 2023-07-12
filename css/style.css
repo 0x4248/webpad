@@ -45,8 +45,7 @@ hr {
 #editor {
 	display : block;
 	position : absolute;
-	/* Leave space for nav */
-	top : 60px;
+	top : 70px;
 	bottom : 0;
 	left : 0;
 	right : 0;
