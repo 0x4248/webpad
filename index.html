@@ -1,0 +1,42 @@
+<html lang="en">
+<head>
+	<title>Code Editor</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+	<h1>WebPad <span style="font-size: 15px;">A simple code editor</span></h1>
+	<hr>
+	<div id="editor"></div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js" type="text/javascript" charset="utf-8"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		var urlParams = new URLSearchParams(window.location.search);
+		var editorType = urlParams.get('editor');
+		if (editorType == null) {
+			editorType = "text";
+		}
+		var text = urlParams.get('text');
+		var editor = ace.edit("editor");
+		if (text != null) {
+			editor.setValue(text);
+		}
+		ace.config.setModuleUrl(
+			"ace/theme/github_dark",
+			"https://ace.c9.io/build/src/theme-github_dark.js"
+		);
+		editor.setTheme("ace/theme/github_dark");
+		editor.session.setMode("ace/mode/" + editorType);
+		editor.setKeyboardHandler("ace/keyboard/vscode");
+		editor.setOptions({
+			showPrintMargin: false,
+			fontSize: "20px",
+			highlightActiveLine: false,
+			wrap: true,
+			enableBasicAutocompletion: true,
+			enableLiveAutocompletion: true,
+			enableSnippets: true,
+		});
+		
+	</script>
+</body>
+</html>

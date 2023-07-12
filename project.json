@@ -1,0 +1,12 @@
+{
+    "name": "Webpad",
+    "description": "A simple code editor",
+    "version": "",
+    "main_file": "index.html",
+    "author": "Lewis Evans",
+    "license": "The Unlicence",
+    "url": "https://www.github.com/lewisevans2007/webpad",
+    "email": "none",
+    "languages": [],
+    "actions": {}
+}
