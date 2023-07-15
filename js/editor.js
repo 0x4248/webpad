@@ -35,8 +35,8 @@ function share_text() {
     text = LZString.compressToEncodedURIComponent(text);
     var url = window.location.href;
     var new_url = url.split('?')[0] + "?editor=" + editorType + "&text=" + text;
-    window.location.href = new_url;
     navigator.clipboard.writeText(new_url);
+    window.location.href = new_url;
 }
 
 var dropdown = document.querySelector("select");
